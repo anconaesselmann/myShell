@@ -1,0 +1,1 @@
+./myshell ./myprogram arg1 arg2 arg3 2>> standardErrorOutAppend.txt >> standardOutAppend.txt < inputFile.txt &

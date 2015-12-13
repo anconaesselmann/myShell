@@ -1,0 +1,37 @@
+For this assignment you will extend your shell/command-line interpreter from homework 3. The new functionality will include executing commands in the background using the & symbol; redirecting the standard input, standard output and standard error streams to or from files using the <, > and 2> symbols; and redirecting and appending the standard output and standard error streams to files using the >> and 2>> symbols.
+
+You can assume that each of the six symbols you have to support -- <, >, 2>, >>, 2>>, and & -- all appear as their own tokens (i.e. there will be a space before and after all the redirect symbols, and space before the &). You must still handle up to three other command line arguments. So the theoretical maximum number of tokens in a command line string will be seven:
+
+Myshell> ./myprogram arg1 arg2 arg3 2> myfile.txt &
+
+Here are some sample executions showing the required functionality:
+
+Execute a command in the background:
+
+Myshell> cp bigFile bigFileCopy &
+
+Redirect the standard output of a command to a file:
+
+Myshell> ls > outfile
+
+Redirect and append the standard output of a command to a file:
+
+Myshell> ls -l >> outfile
+
+Redirect the standard error of a command to a file:
+
+Myshell> ./a.out 2> error.log
+
+Redirect and append the standard error of a command to a file:
+
+Myshell> ./a.out 2>> error.log
+
+Redirect the standard input of a command to come from a file:
+
+Myshell> grep disk < outfile
+
+To create background processes, you can simply omit the call to wait.
+
+To redirect standard input, standard output or standard error to or from a file, you will need to open the file with the appropriate access mode and then replace the target stream with the file descriptor. This can be accomplished using the close, dup,  and dup2 functions.
+
+You should submit your source code files and a short writeup in pdf format that includes a description of what you did and the compilation and execution output from each of your programs. Demonstrate all required functionality, and include some commands with multiple command-line arguments. For each file you use to demonstrate redirection, print the contents of the file on the command-line using the cat command on Linux. Submit everything to the regular submission link on iLearn.
