@@ -6,7 +6,7 @@
 #include "String.h"
 
 typedef struct _IO {
-    void (*write)(void *, String *);
+    void (*out)(void *, String *);
     FILE *fp;
 } IO;
 

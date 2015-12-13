@@ -4,27 +4,8 @@
 
 
 int main(int argc, char *argv[]) {
-    String *str;
-
-    Shell *shell = newShell(argc, argv);
-
-    str = shell->toString(shell);
-    printf("%s\n", str->cString);
-
-    // struct IO screen = { IOSCREEN, "screen" };
-    // struct IO file   = { IOFILE, "file" };
-
-    // new();
-
-    // printf("%s says %s\n", screen.name, io_sound(&screen));
-    // printf("%s says %s\n", file.name, io_sound(&file));
-
-    // Shell shell = newShell(argc, argv);
-
-    // String *pageReplacementAlgorythm, *fileName;
-    // long lgPageSize, pageSize, logicalMemorySize, nbrFrames, verbose;
-    // readArguments(&argc, argv, &lgPageSize, &pageSize, &logicalMemorySize, &pageReplacementAlgorythm, &nbrFrames, &verbose, &fileName);
-
+    Shell *shell = newShell();
+    shell->userPrompt(shell);
     return 0;
 }
 

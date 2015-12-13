@@ -1,7 +1,7 @@
 #include "IO.h"
 #include "IOScreen.h"
 
-void screen_write(void *_this, String *_str) {
+void screen_out(void *_this, String *_str) {
     // IOScreen *this = (IOScreen*)_this;
     String *str = newString(_str->cString);
     printf("%s\n", str->cString);
@@ -10,7 +10,7 @@ void screen_write(void *_this, String *_str) {
 
 IOScreen *newIOScreen() {
     IOScreen *this = malloc(sizeof(IOScreen));
-    this->write = &screen_write;
+    this->out = &screen_out;
     return this;
 }
 

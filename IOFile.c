@@ -1,7 +1,7 @@
 #include "IO.h"
 #include "IOFile.h"
 
-void file_write(void *_this, String *_str) {
+void file_out(void *_this, String *_str) {
     IOFile *this = (IOFile*)_this;
     String *str = newString(_str->cString);
     fprintf(this->fp, "%s\n", str->cString);
@@ -10,7 +10,7 @@ void file_write(void *_this, String *_str) {
 
 IOFile *newIOFile(String *fileName, char mode[]) {
     IOFile *this = malloc(sizeof(IOFile));
-    this->write = &file_write;
+    this->out = &file_out;
     this->fp = fopen(fileName->cString, mode);
     return this;
 }

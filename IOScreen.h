@@ -6,12 +6,12 @@
 #include <stdlib.h>
 
 typedef struct _IOScreen {
-    void (*write)(void *, String *);
+    void (*out)(void *, String *);
     FILE *fp;
 } IOScreen;
 
 IOScreen *newIOScreen();
 
-void write(void *, String*);
+void out(void *, String*);
 
 #endif
