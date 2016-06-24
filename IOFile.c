@@ -11,6 +11,7 @@ void file_out(void *_this, String *_str) {
 IOFile *newIOFile(String *fileName, char mode[]) {
     IOFile *this = malloc(sizeof(IOFile));
     this->out = &file_out;
+    this->isFile = 1;
     this->fp = fopen(fileName->cString, mode);
     return this;
 }

@@ -8,6 +8,7 @@
 typedef struct _IOFile {
     void (*out)(void *, String *);
     FILE *fp;
+    int isFile;
 } IOFile;
 
 IOFile *newIOFile(String *fileName, char mode[]);

@@ -5,7 +5,7 @@
 #include "IO.h"
 
 typedef struct _Shell {
-    const struct shell_vtable *vtable;
+    // const struct shell_vtable *vtable;
     int (*userPrompt)(void *_this);
     String *programName;
     int bgMode;

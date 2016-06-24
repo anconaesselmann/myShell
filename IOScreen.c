@@ -11,6 +11,7 @@ void screen_out(void *_this, String *_str) {
 IOScreen *newIOScreen() {
     IOScreen *this = malloc(sizeof(IOScreen));
     this->out = &screen_out;
+    this->isFile = 0;
     return this;
 }
 

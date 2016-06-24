@@ -1,0 +1,26 @@
+testing
+total 4264
+-rw-r--r--@ 1 axelanconaesselmann  wheel     187 Dec 13 16:03 IO.h
+-rw-r--r--@ 1 axelanconaesselmann  wheel  509656 Dec 13 16:14 IO.h.gch
+-rw-r--r--@ 1 axelanconaesselmann  wheel     496 Dec 13 16:04 IOFile.c
+-rw-r--r--@ 1 axelanconaesselmann  wheel     284 Dec 13 16:03 IOFile.h
+-rw-r--r--@ 1 axelanconaesselmann  wheel  509592 Dec 13 16:14 IOFile.h.gch
+-rw-r--r--@ 1 axelanconaesselmann  wheel    4656 Dec 13 16:14 IOFile.o
+-rw-r--r--@ 1 axelanconaesselmann  wheel     430 Dec 13 16:03 IOScreen.c
+-rw-r--r--@ 1 axelanconaesselmann  wheel     265 Dec 13 16:03 IOScreen.h
+-rw-r--r--@ 1 axelanconaesselmann  wheel  509492 Dec 13 16:14 IOScreen.h.gch
+-rw-r--r--@ 1 axelanconaesselmann  wheel    4500 Dec 13 16:14 IOScreen.o
+-rw-r--r--@ 1 axelanconaesselmann  wheel     716 Dec 12 22:48 Makefile
+-rw-r--r--@ 1 axelanconaesselmann  wheel    5368 Dec 13 16:13 Shell.c
+-rw-r--r--@ 1 axelanconaesselmann  wheel     574 Dec 13 15:37 Shell.h
+-rw-r--r--@ 1 axelanconaesselmann  wheel  511960 Dec 13 16:14 Shell.h.gch
+-rw-r--r--@ 1 axelanconaesselmann  wheel   13312 Dec 13 16:14 Shell.o
+-rw-r--r--@ 1 axelanconaesselmann  wheel    1841 Dec 12 18:01 String.c
+-rw-r--r--@ 1 axelanconaesselmann  wheel     698 Dec 12 17:58 String.h
+-rw-r--r--@ 1 axelanconaesselmann  wheel    5836 Dec 13 16:14 String.o
+-rw-r--r--@ 1 axelanconaesselmann  wheel     110 Dec 13 02:23 cmd.sh
+-rwxr-xr-x@ 1 axelanconaesselmann  wheel   17060 Dec 13 16:14 myshell
+-rw-r--r--@ 1 axelanconaesselmann  wheel    1651 Dec 13 10:29 myshell.c
+-rw-r--r--@ 1 axelanconaesselmann  wheel    4188 Dec 13 16:14 myshell.o
+-rw-r--r--@ 1 axelanconaesselmann  wheel    2259 Dec 12 17:22 prompt.txt
+-rw-r--r--@ 1 axelanconaesselmann  wheel       8 Dec 13 16:15 test.txt

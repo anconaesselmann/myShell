@@ -8,6 +8,7 @@
 typedef struct _IO {
     void (*out)(void *, String *);
     FILE *fp;
+    int isFile;
 } IO;
 
 #endif

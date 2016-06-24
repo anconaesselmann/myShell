@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include "Shell.h"
 #include "String.h"
 #include "IO.h"
@@ -11,32 +13,17 @@
 
 #define BUFFER_SIZE 1024
 
-#define OK       0
-#define NO_INPUT 1
-#define TOO_LONG 2
-static int getLine (char *prmpt, char *buff, size_t sz) {
-    int ch, extra;
-
-    // Get line with buffer overrun protection.
-    if (prmpt != NULL) {
-        printf ("%s", prmpt);
-        fflush (stdout);
+static int cin (char *buffer) {
+    char current;
+    printf ("$");
+    fflush (stdout);
+    if (fgets (buffer, BUFFER_SIZE, stdin) == NULL) return -1;
+    if (buffer[strlen(buffer) - 1] != '\n') {
+        while (((current = getchar()) != '\n') && (current != EOF)) return 1;
+        return 0;
     }
-    if (fgets (buff, sz, stdin) == NULL)
-        return NO_INPUT;
-
-    // If it was too long, there'll be no newline. In that case, we flush
-    // to end of line so that excess doesn't affect the next call.
-    if (buff[strlen(buff)-1] != '\n') {
-        extra = 0;
-        while (((ch = getchar()) != '\n') && (ch != EOF))
-            extra = 1;
-        return (extra == 1) ? TOO_LONG : OK;
-    }
-
-    // Otherwise remove newline and give string back to caller.
-    buff[strlen(buff)-1] = '\0';
-    return OK;
+    buffer[strlen(buffer) - 1] = '\0';
+    return 1;
 }
 
 static void arrayShift(char *array[], int *length, int index) {
@@ -125,8 +112,7 @@ static void initFromArgV(void *_this, char *userInput) {
 
     parseArgs(
         this,
-        // newString(userInput), //"ls -l 2>> standardErrorOutAppend2.txt >> standardOutAppend2.txt < inputFile.txt &"
-        newString("ls -l 2>> standardErrorOutAppend2.txt >> standardOutAppend2.txt < inputFile.txt &"),
+        newString(userInput),
         &argc,
         argv
     );
@@ -140,6 +126,7 @@ static void initFromArgV(void *_this, char *userInput) {
     if (this->output      == 0) this->output      = (IO*)(newIOScreen());
     if (this->errorOutput == 0) this->errorOutput = (IO*)(newIOScreen());
     if (this->input       == 0) this->input       = (IO*)(newIOScreen());
+    argc += 1;
     argv[argc] = 0;
     this->args = argv;
     this->argc = argc;
@@ -153,23 +140,28 @@ Shell *newShell() {
 
 int userPrompt(void *_this) {
     Shell *this = (Shell*)_this;
-    char buffer[1024];
-    char prompt[] = "$";
-    getLine(prompt, buffer, BUFFER_SIZE);
+    char buffer[BUFFER_SIZE];
+    cin(buffer);
     printf("%s\n", buffer);
     initFromArgV(this, buffer);
     pid_t  pid = fork();
     if(pid == 0) {
+        if (this->output->isFile       != 0) dup2(fileno(this->output->fp)      , STDOUT_FILENO);
+        if (this->errorOutput->isFile  != 0) dup2(fileno(this->errorOutput->fp) , STDERR_FILENO);
+        if (this->input->isFile        != 0) dup2(fileno(this->input->fp) , STDERR_FILENO);
         execvp(this->args[0], this->args);
-        exit(0);
+        exit(-1);
     } else {
-        int status;
-        waitpid(pid, &status, 0);
-        if (status == 0) {
-            // this->userPrompt(this);
-        } else {
-            printf("an error occured.\n");
-        }
+        if (this->bgMode == 0) {
+            int status;
+            waitpid(pid, &status, 0);
+            if (status == 0) {
+                this->userPrompt(this);
+            } else {
+                this->userPrompt(this);
+            }
+        } else this->userPrompt(this);
+
     }
     return 0;
 }

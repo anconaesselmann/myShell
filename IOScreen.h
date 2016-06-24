@@ -8,6 +8,7 @@
 typedef struct _IOScreen {
     void (*out)(void *, String *);
     FILE *fp;
+    int isFile;
 } IOScreen;
 
 IOScreen *newIOScreen();
